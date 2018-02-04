@@ -76,7 +76,8 @@ class DetailEvalKpt:
         category_id = 284   # human category id
         count = 0
         for gt in self.gt_imgs:
-            img_kpt_list = gt['keypoints']
+            img_kpt_list = []
+            img_kpt_list_anno_ids = gt['keypoints']
             '''
             img_kpt_list:  [{'num_keypoints': ... , 
             'image_id': ..., 
@@ -88,9 +89,15 @@ class DetailEvalKpt:
             ## TODO: either 'instance_id' or 'person_id' is redundant? 
             '''
             # set ignore flag
-            for i in range(len(img_kpt_list)):
+            for i in range(len(img_kpt_list_anno_ids)):
+                img_kpt_list.append({})
                 img_kpt_list[i]['id'] = count
                 count += 1
+                this_kpt_anno = self.detail_gt.getKptAnno(int(img_kpt_list_anno_ids[i]))
+                # copy all item under this_kpt_anno into img_kpt_list:
+                for k in this_kpt_anno.keys():
+                    img_kpt_list[i][k] = this_kpt_anno[k]
+
                 img_kpt_list[i]['ignore'] = (img_kpt_list[i]['num_keypoints'] == 0) or False
                 bb = img_kpt_list[i]['bbox']
                 img_kpt_list[i]['area'] = bb[2] * bb[3]

@@ -397,6 +397,16 @@ class Detail:
 
         return mask
 
+    def getKptAnno(self, skeleton_id=0):
+        """
+        Get keypoints annotations by skeleton_id
+        :param skeleton_id (int): get the #skeleton_id of kpts annotations 
+        :return: kpt_annotation (dict)   : kpts dicts
+        """
+        assert(type(skeleton_id) is int) # skeleton_id must be int
+        assert(skeleton_id < len(self.kpts) and skeleton_id >= 0) # skeleton_id can not get out of bound
+        return self.kpts[skeleton_id]
+
     def getKpts(self, img, show=False):
         """
         Get human keypoints for the image.
