@@ -93,7 +93,8 @@ class DetailEvalCls:
         # average ap
         record['map'] = voc_ap.sum()/float(len(record['cat_ap']))
         #TODO: print stats as COCO?
-        [print(record_single) for record_single in record['cat_ap']]
+        for record_single in record['cat_ap']:
+            print(record_single)
         print('======= \n Mean ap over #%d categories %f'%(self.num_cats, record['map']))
         return record['map']
  
