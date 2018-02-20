@@ -400,7 +400,7 @@ class Detail:
     def getKptAnno(self, skeleton_id=0):
         """
         Get keypoints annotations by skeleton_id
-        :param skeleton_id (int): get the #skeleton_id of kpts annotations 
+        :param skeleton_id (int): get the #skeleton_id of kpts annotations
         :return: kpt_annotation (dict)   : kpts dicts
         """
         assert(type(skeleton_id) is int) # skeleton_id must be int
@@ -762,7 +762,7 @@ class Detail:
             self.cats_mapping=[(_['category_id'],_['name']) for _ in self.getCats()]
         if type(index)==int:
             return self.cats_mapping[[_[0] for _ in self.cats_mapping].index(index)][1]
-        elif type(index)==str:
+        elif type(index)==str or type(index)==unicode:
             return self.cats_mapping[[_[1] for _ in self.cats_mapping].index(index)][0]
 
 
