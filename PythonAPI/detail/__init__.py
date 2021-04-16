@@ -98,10 +98,11 @@ class Detail:
             self.occlusion[occl['image_id']] = occl
         for bound in self.data['annos_boundary']:           # one per image
             self.bounds[bound['image_id']] = bound
-        # for skeleton in self.data['annos_joints']:          # many per image
-            # skeletons are 1-indexed in JSON file and
-            # 0-indexed in self.kpts
-            # self.kpts[skeleton['person_id'] - 1] = skeleton
+        if 'annos_joints' in self.data:
+            for skeleton in self.data['annos_joints']:          # many per image
+                # skeletons are 1-indexed in JSON file and
+                # 0-indexed in self.kpts
+                self.kpts[skeleton['person_id'] - 1] = skeleton
 
 
         # Follow references
